@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "9d1ad632-9b2b-4f79-9a65-ccaf6ea8c6b3",
+		"name": "Todoist Tasks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TASKS",
+			"item": [
+				{
+					"name": "Create Task",
+					"item": [
+						{
+							"name": "Create new task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"{\r",
+											"    \r",
+											"\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.test(\"Content is correct\", function () {\r",
+											"        pm.expect(jsonData.content).to.eql(\"Buy Cookies\");\r",
+											"    });\r",
+											"\r",
+											"   \r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-Id",
+										"value": "$(uuidgen)",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Buy Cookies\", \r\n    \"due_string\": \"tomorrow at 1:00\", \r\n    \"due_lang\": \"en\", \r\n    \"priority\": 4\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}",
+									"host": [
+										"{{baseURL}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Task",
+					"item": [
+						{
+							"name": "Get Tasks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}",
+									"host": [
+										"{{baseURL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get one task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"{\r",
+											"    \r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.test(\"Content is correct\", function () {\r",
+											"        pm.expect(jsonData.content).to.eql(\"Buy Cookies\");\r",
+											"    });\r",
+											"\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.test(\"Content is incorrect\", function () {\r",
+											"        pm.expect(jsonData.content).to.eql(\"Buy anything\");\r",
+											"    });\r",
+											"\r",
+											"   \r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/{{idCookies}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"{{idCookies}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update Task",
+					"item": [
+						{
+							"name": "Update a task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-Id",
+										"value": "$(uuidgen)",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Buy Coffee\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseURL}}/{{idCoffee}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"{{idCoffee}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status complete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"completed\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/{{idMilk}}/close",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"{{idMilk}}",
+										"close"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reopen task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"completed\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/{{idMilk}}/reopen",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"{{idMilk}}",
+										"reopen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Task",
+					"item": [
+						{
+							"name": "Delete task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"{\r",
+											"    pm.test(\"Status code is 2xx\", function () {\r",
+											"        pm.response.to.be.success;\r",
+											"    });\r",
+											"\r",
+											"\r",
+											"    pm.test(\"Response time is less than 600ms\", function () {\r",
+											"        pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"    });\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://api.todoist.com/rest/v1/tasks/4679122729",
+									"protocol": "https",
+									"host": [
+										"api",
+										"todoist",
+										"com"
+									],
+									"path": [
+										"rest",
+										"v1",
+										"tasks",
+										"4679122729"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"{",
+					"    pm.test(\"Status code is 2xx\", function () {",
+					"        pm.response.to.be.success;",
+					"    });",
+					"",
+					"     pm.test(\"Response time is less than 600ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(600);",
+					"    });",
+					"",
+					"     pm.test(\"Negative\", function () {",
+					"        pm.response.to.have.status(400);",
+					"    });",
+					"}"
+				]
+			}
+		}
+	]
+}
